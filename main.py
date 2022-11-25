@@ -17,13 +17,13 @@ def success():
 		f.save(f.filename)
 		df=pd.read_csv(f.filename)
 		profile=pp.ProfileReport(df)
-		profile.to_file(output_file="output.html")
-		
+		# Save the report as an HTML file in templates folder
+		profile.to_file(output_file="templates/profile.html")
 		describe = df.describe()
 		describe.round(2)
 		print("Describe\n",describe)
 		stat = describe.head().index.values
-		return render_template("success.html",columns=df.columns,n=len(df.columns),describe=describe,stat=stat)
+		return render_template("profile.html",columns=df.columns,n=len(df.columns),describe=describe,stat=stat)
 		# return render_template("success.html",name=f.filename)
 	# If user does not select file, show an error message
 	else:
