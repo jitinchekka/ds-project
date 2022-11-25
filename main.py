@@ -53,6 +53,9 @@ def success():
 	else:
 		return render_template("upload.html")
 
+@app.route("/kmeans")
+def kmeans():
+	return render_template("kmeans.html")
 
 if __name__ == "__main__":
 
