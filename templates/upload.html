@@ -55,7 +55,7 @@
 			text-align: center;
 			padding-top: 10px;
 			font-size: large;
-			color: aliceblue;
+			color: black;
 			font-weight: 400;
 		}
 
@@ -93,7 +93,7 @@
 				</div>
 				<div class="drop">or drop csv file here</div>
 				<div class="submit">
-					<input type="file" name="file" id="data">
+					<input type="file" name="file" id="data" accept=".csv">
 					<button type="submit">submit</button>
 				</div>
 			</div>
@@ -110,9 +110,20 @@
 	<script>
 		const input = document.querySelector('input');
 		const upload = document.querySelector('.upload');
+		const drop = document.querySelector('.drop')
+		let id, prev = 0;
 		upload.addEventListener('click', () => {
 			input.click();
-		})
+			console.dir(input);
+			id = setInterval(() => {
+				if (input.value != prev) {
+					clearInterval(id);
+					id = 0;
+					drop.innerHTML = `${(input.value).slice(12)} is Uploaded`
+					prev = input.value;
+				}
+			}, 1000)
+		});
 	</script>
 </body>
 
