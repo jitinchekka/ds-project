@@ -32,6 +32,10 @@
         {% endfor %}
       </tbody>
     </table>
+    <form action="/graph" method="POST">
+      <input type="hidden" name="filename" value="{{name}}" />
+      <input type="submit" value="Show Graph" />
+    </form>
   </body>
   <script
     src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
