@@ -9,6 +9,8 @@ import pandas_profiling as pp
 from sklearn.cluster import KMeans
 from sklearn import preprocessing
 from sklearn import linear_model
+from sklearn.decomposition import PCA
+from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import mean_squared_error, r2_score
 
 app = Flask(__name__)
@@ -63,6 +65,37 @@ def success():
 	else:
 		return render_template("upload.html")
 
+@app.route("/pca_before")
+def pca_before():
+	f=file_name
+	df = pd.read_csv(f)
+	#n=number of columns
+	
+	return render_template("pca_before.html",columns=len(df.columns))
+
+@app.route("/pca_after", methods=["POST"])
+def pca():
+	# Print the request object
+	print(request.form)
+	f = file_name
+	df_copy = pd.read_csv(f)
+	n_components = int(request.form["n_components"])
+	# Preprocessing
+	df_copy = df_copy.dropna()
+	df_copy = df_copy.drop_duplicates()
+	# df_copy = df_copy.drop(["Outcome"], axis=1)
+	# Standardize the data
+	X = StandardScaler().fit_transform(df_copy)
+	# PCA
+	pca = PCA(n_components=n_components)
+	principalComponents = pca.fit_transform(X)
+	# Create a dataframe with the principal components
+	principalDf = pd.DataFrame(data=principalComponents)
+	print(principalDf)
+	columns=principalDf.columns
+	print(columns)
+	return render_template("pca_after.html", name=f,colums=columns)
+
 
 @app.route("/clustering_before")
 def kmeans():
@@ -109,9 +142,10 @@ def prediction():
 	df = pd.read_csv(f)
 	return render_template("prediction_before.html", columns=df.columns.values)
 
+
 @app.route("/prediction_after", methods=["POST"])
 def prediction_after():
-	print("POST request",request.form)
+	print("POST request", request.form)
 	x_column = request.form["x"]
 	y_column = request.form["y"]
 	x_value = float(request.form["x_value"])
@@ -132,11 +166,18 @@ def prediction_after():
 	# The coefficients
 	print("Coefficients: ", regr.coef_)
 	# The mean squared error
-	print("Mean squared error: %.2f" % mean_squared_error(diabetes_y_test, diabetes_y_pred))
+	print(
+		"Mean squared error: %.2f"
+		% mean_squared_error(diabetes_y_test, diabetes_y_pred)
+	)
 	predicted_value = regr.predict([[x_value]])
 	print("Predicted value: ", predicted_value)
 	# The coefficient of determination: 1 is perfect prediction
-	print("Coefficient of determination: %.2f" % r2_score(diabetes_y_test, diabetes_y_pred))
+	coef = r2_score(diabetes_y_test, diabetes_y_pred)
+	print(
+		"Coefficient of determination: %.2f"
+		% r2_score(diabetes_y_test, diabetes_y_pred)
+	)
 
 	# Plot output
 	matplotlib.pyplot.scatter(diabetes_X_test, diabetes_y_test, color="black")
@@ -148,7 +189,17 @@ def prediction_after():
 	# clear the plot
 	matplotlib.pyplot.clf()
 	graph = "{}_{}.png".format(x_column, y_column)
-	return render_template("prediction_after.html", graph=graph, predicted_value=predicted_value.item(),columns=df.columns)
+	return render_template(
+		"prediction_after.html",
+		graph=graph,
+		predicted_value=predicted_value.item(),
+		columns=df.columns,
+		m=regr.coef_[0],
+		c=regr.intercept_,
+		coef=coef,
+	)
+
+
 if __name__ == "__main__":
 
 	app.run(host="127.0.0.1", port=8080, debug=True)

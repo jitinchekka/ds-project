@@ -50,6 +50,15 @@ nextPage.style.justifyContent = "End"
 Cluster.href = "clustering_before"
 Regression.href = "prediction_before"
 
+// RaKo PCA
+const pca = document.createElement('a');
+nextPage.append(pca);
+pca.innerHTML = '<button type="button" class="btn btn-primary btn-lg"><i class="bi bi-arrow-left"></i>PCA</button>';
+pca.children[0].style.marginRight = "70px";
+pca.children[0].style.margin = "10px";
+pca.children[0].style.width = "140px";
+pca.href = "pca_before"
+
 //footer removal
 document.querySelector(".row.center-block.footer-text").style.display = "none";
 
