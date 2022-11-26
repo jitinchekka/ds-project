@@ -47,7 +47,7 @@ document.body.append(nextPage);
 nextPage.style.display = "flex"
 nextPage.style.margin = "30px"
 nextPage.style.justifyContent = "End"
-Cluster.href = "kmeans"
+Cluster.href = "clustering_before"
 Regression.href = "prediction_before"
 
 //footer removal
