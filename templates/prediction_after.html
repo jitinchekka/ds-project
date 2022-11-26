@@ -78,10 +78,21 @@
                 </form>
                 <!-- Show the predicted value upto 2 decimal -->
                 <div class="text-center mt-5">
-                    <h1 class="fs-1">Predicted Value: {{ predicted_value | round(2) }}</h1>
+                    <h1 class="fs-2">Predicted Value: {{ predicted_value | round(2) }}</h1>
                 </div>
+                <div class="text-center mt-1">
+                    <h3 class="fs-2">Slope of Graph: {{ m | round(2) }}</h3>
+                </div>
+                <div class="text-center mt-1">
+                    <h3 class="fs-2">Predicted Value: {{ c | round(2) }}</h3>
+                </div>
+                <div class="text-center mt-1">
+                    <h3 class="fs-2">Coefficient of determination: {{ coef | round(2) }}</h3>
+                </div>
+                
             </div>
-            <div class="col d-flex justify-content-center mt-5"><img src="/static/{{graph}}" alt="">
+            <div class="col d-flex justify-content-center mt-5">
+                <img src="/static/{{graph}}" alt="">
             </div>
         </div>
     </div>
