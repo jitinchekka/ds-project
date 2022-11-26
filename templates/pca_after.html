@@ -48,22 +48,42 @@
 				<form action="/pca_after" method="POST">
 					<div class="mt-4 form-group text-center">
 						<label for="n_components" class="fs-4 mb-2">Number of components</label>
-						<select class="form-select form-select-lg mb-3 form-control" name="n_components" id="n_components"
-							aria-label=".form-select-lg example" required>
+						<select class="form-select form-select-lg mb-3 form-control" name="n_components"
+							id="n_components" aria-label=".form-select-lg example" required>
 							<option selected>Select number of components</option>
-							{%for i in range(1,columns+1)%}
+							{%for i in range(1,n+1)%}
 							<option value="{{i}}">{{i}}</option>
 							{%endfor%}
 						</select>
 					</div>
-			
+
 					<div class="text-center mt-3">
 						<button class="btn btn-primary submit fs-4" type="submit">Submit</button>
 					</div>
 				</form>
 			</div>
+			<!-- PCA output -->
 			<div class="col d-flex justify-content-center mt-5">
-				
+				<!-- Print the Pandas dataframe principalDf with {{n}} columns -->
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							{%for i in range(1,n+1)%}
+							<th scope="col">Component {{i}}</th>
+							{%endfor%}
+						</tr>
+					</thead>
+					<tbody>
+						{%for i in range(0,5)%}
+						<tr>
+
+							{%for j in range (0,n)%}
+							<td>{{principalDf[i][j]}}</td>
+							{%endfor%}
+						</tr>
+						{%endfor%}	
+					</tbody>
+				</table>
 			</div>
 		</div>
 	</div>
