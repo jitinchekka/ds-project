@@ -1,5 +1,12 @@
 /.venv
 /.vscode
 /__pycache__
+/landslide_data3_miss.csv
 /templates/profile.html
+
+/static/*
+!/static/ss1.png
+!/static/ss2.png
+!/static/ss3.png
+!/static/ss4.png
 /.gitignore
