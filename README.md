@@ -29,7 +29,11 @@ Output: Complete Data Analysis such as mean, Meidan, IQR etc, Visualization usin
 
 ### Screenshots:
 ![Overview](./static/ss1.png)
+*Overview of the dataset*
 ![Column wise analysis of dataset](./static/ss2.png)
+*Column wise analysis of dataset*
 ![Scatter Plots](./static/ss3.png)
+*Scatter Plots of each column with respect to other columns*
 ![Prediction](./static/ss4.png)
+*Prediction using Linear Regression*
 
