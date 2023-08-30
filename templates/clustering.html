@@ -20,26 +20,26 @@
 			<div class="col-md-3">
 				<!-- Form with two dropdowns -->
 				<form action="/clustering_after" method="POST">
-					<div class="form-group">
-						<label for="x">X</label>
-						<select class="form-control" id="x" name="x">
+					<div class="form-group mt-1">
+						<label for="x" class ="fs-4">Independent Variable</label>
+						<select class="form-control form-select-lg" id="x" name="x">
 							{% for column in columns %}
 							<option value="{{ column }}">{{ column }}</option>
 							{% endfor %}
 						</select>
 					</div>
-					<div class="form-group">
-						<label for="y">Y</label>
-						<select class="form-control" id="y" name="y">
+					<div class="form-group mt-1">
+						<label for="y" class ="fs-4" >Dependent Variable</label>
+						<select class="form-control-md form-select-lg" id="y" name="y">
 							{% for column in columns %}
 							<option value="{{ column }}">{{ column }}</option>
 							{% endfor %}
 						</select>
 					</div>
 					<!-- Dropdown to select number n from 1 to 10 -->
-					<div class="form-group">
-						<label for="x_value">Number of clusters</label>
-						<select class="form-control" id="x_value" name="x_value">
+					<div class="form-group mt-1 mb-2">
+						<label for="x_value" class ="fs-4">Number of clusters</label>
+						<select class="form-control form-select-lg" id="x_value" name="x_value">
 							{% for i in range(1, 11) %}
 							<option value="{{ i }}">{{ i }}</option>
 							{% endfor %}

@@ -5,9 +5,9 @@ import pandas as pd
 import matplotlib
 
 matplotlib.use("Agg")
-import pandas_profiling as pp
+import  ydata_profiling as pp
 from sklearn.cluster import KMeans
-from sklearn import preprocessing
+# from sklearn import preprocessing
 from sklearn import linear_model
 from sklearn.decomposition import PCA
 from sklearn.preprocessing import StandardScaler
@@ -35,6 +35,7 @@ def allowed_file(filename):
 
 
 file_name = "diabetes.csv"
+# file_name = "landslide_data3_miss.csv"
 
 
 @app.route("/success", methods=["POST"])
@@ -65,13 +66,15 @@ def success():
 	else:
 		return render_template("upload.html")
 
+
 @app.route("/pca_before")
 def pca_before():
-	f=file_name
+	f = file_name
 	df = pd.read_csv(f)
-	#n=number of columns
-	
-	return render_template("pca_before.html",columns=len(df.columns))
+	# n=number of columns
+
+	return render_template("pca_before.html", columns=len(df.columns))
+
 
 @app.route("/pca_after", methods=["POST"])
 def pca():
@@ -92,9 +95,9 @@ def pca():
 	# Create a dataframe with the principal components
 	principalDf = pd.DataFrame(data=principalComponents)
 	print(principalDf)
-	columns=principalDf.columns
+	columns = len(principalDf.columns)
 	print(columns)
-	return render_template("pca_after.html", name=f,colums=columns)
+	return render_template("pca_after.html", n=columns, principalDf=principalDf.values)
 
 
 @app.route("/clustering_before")
@@ -127,6 +130,8 @@ def clustering():
 		matplotlib.pyplot.title("K means clustering")
 		# Save the plot as a png file in static folder
 		matplotlib.pyplot.savefig("static/{}_{}.png".format(i, j))
+		#Clear the plot
+		matplotlib.pyplot.clf()
 		# Return the plot to the user
 		graph = "{}_{}.png".format(i, j)
 		print("Graph is ", graph)

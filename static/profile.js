@@ -66,3 +66,4 @@ pca.href = "pca_before";
 
 //footer removal
 document.querySelector(".row.center-block.footer-text").style.display = "none";
+document.getElementsByTagName("title")[0].innerText = "Exploratory Data Analysis";
