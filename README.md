@@ -2,7 +2,7 @@
 This is a Web Application for Exploratory Data Analysis (EDA), Data Visualization and Prediction of a CSV file.
 
 ### How it works:
-1. Upload the CSV file
+1. Upload any dataset as a CSV file
 2. Click on `Submit` button
 3. You will see the complete Data Analysis, Visualization and Prediction in an interactive web page
 <!-- Input: CSV file  
